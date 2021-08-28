@@ -1,0 +1,49 @@
+# This role includes installing plugin YouCompleteMe and some of the required
+# dependencies, but not all. The compilation step is currently omitted. To
+# complete the build process, ensure go and node/npm are installed and run 
+#
+#   ./install.py --all
+#
+# from the YouCompleteMe bundle home directory. See the quick start
+# instructions for more details:
+#
+#   https://github.com/ycm-core/YouCompleteMe#linux-64-bit
+#
+---
+- name: install packages
+  apt:
+    name:
+      - vim-nox
+      - build-essential
+      - cmake
+      - python3-dev
+      - mono-complete
+      - default-jdk
+
+- name: config directory
+  file:
+    path: "{{ config_path }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+
+- name: config files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ config_path }}/{{ item }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+  with_items:
+    - vimrc
+    - plugins.vim
+  notify:
+    - install vundle plugins
+
+- name: clone vundle
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: "{{ config_path }}/bundle/Vundle.vim"
+    version: master

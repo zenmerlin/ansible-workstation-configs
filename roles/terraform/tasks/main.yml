@@ -1,0 +1,56 @@
+---
+- name: clone terraform env manager (tfenv)
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/tfutils/tfenv.git
+    dest: "{{ tfenv_path }}"
+    version: master
+
+- name: clone terragrunt env manager (tgenv)
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/cunymatthieu/tgenv.git
+    dest: "{{ tgenv_path }}"
+    version: master
+
+- name: zsh config
+  copy:
+    src: tfrc.zsh
+    dest: "/home/{{ username }}/.config/zshrc/tfrc.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: install terraform versions
+  become_user: "{{ username }}"
+  command: "{{ tfenv_path }}/bin/tfenv install {{ item }}"
+  args:
+    creates: "{{ tfenv_path }}/versions/{{ item }}"
+  with_items: "{{ tf_versions }}"
+
+- name: set default terraform version if not set already
+  become_user: "{{ username }}"
+  command: "{{ tfenv_path }}/bin/tfenv use {{ tf_versions | first }}"
+  args:
+    creates: "{{ tfenv_path }}/version"
+
+# Have to use shell for tgenv to make sure the path is sourced. It runs
+# 'terragrunt --version' and will return an error if it fails.
+- name: install terragrunt versions
+  become_user: "{{ username }}"
+  shell:
+    cmd: |
+      source ~/.zshrc
+      {{ tgenv_path }}/bin/tgenv install {{ item }}
+    creates: "{{ tgenv_path }}/versions/{{ item }}/terragrunt"
+    executable: /usr/bin/zsh
+  with_items: "{{ tg_versions }}"
+
+- name: set default terragrunt version if not set already
+  become_user: "{{ username }}"
+  shell: 
+    cmd: |
+      source ~/.zshrc
+      {{ tgenv_path }}/bin/tgenv use {{ tg_versions | first }}
+    creates: "{{ tgenv_path }}/version"
+    executable: /usr/bin/zsh

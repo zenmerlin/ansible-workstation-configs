@@ -1,0 +1,3 @@
+---
+nvm_path: "/home/{{ username }}/.nvm"
+nvm_version: v0.37.2

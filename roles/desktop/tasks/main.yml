@@ -1,0 +1,136 @@
+---
+# Desktop software
+- name: signing key for google chrome apt repository
+  ansible.builtin.apt_key:
+    url: https://dl.google.com/linux/linux_signing_key.pub
+    state: present
+
+- name: google chrome apt repository
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+    state: present
+    filename: google-chrome
+
+- name: apt packages
+  apt:
+    name:
+      - terminator
+      - caffeine
+      - google-chrome-stable
+      - keepassxc
+      - python3-tk
+      - peek
+
+- name: snap packages
+  community.general.snap:
+    name:
+      - discord
+      - spotify
+
+- name: java development related snap packages
+  community.general.snap:
+    name: intellij-idea-community
+    classic: yes
+
+- name: vagrant related packages
+  apt:
+    name:
+      - vagrant
+      - virtualbox
+    install_recommends: yes
+
+- name: config directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+  with_items:
+    - "/home/{{ username }}/.config/terminator"
+
+- name: software configuration
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0600
+  with_items:
+    - src: terminator/config
+      dest: "/home/{{ username }}/.config/terminator/config"
+    - src: intellij-idea/.ideavimrc
+      dest: "/home/{{ username }}/.ideavimrc"
+
+# Desktop appearance / Gnome settings
+- name: background directory
+  file:
+    path: "{{ backgrounds_dir }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+
+- name: copy desktop background
+  copy:
+    src: "backgrounds/{{ background_img }}"
+    dest: "{{ backgrounds_dir }}/{{ background_img }}"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+
+- name: set background
+  become_user: "{{ username }}"
+  dconf:
+    key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file://{{ backgrounds_dir }}/{{ background_img }}'"
+    state: present
+
+- name: clock format
+  become_user: "{{ username }}"
+  dconf:
+    key: "/org/gnome/desktop/interface/clock-format"
+    value: "'12h'"
+    state: present
+
+- name: icon size
+  become_user: "{{ username }}"
+  dconf:
+    key: "/org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size"
+    value: "20"
+    state: present
+
+- name: keybindings
+  become_user: "{{ username }}"
+  dconf:
+    key: "/org/gnome/desktop/wm/keybindings/{{ item.key }}"
+    value: "{{ item.val }}"
+    state: present
+  with_items:
+    - key: move-to-workspace-down
+      val: ['<Shift><Super>j']
+    - key: move-to-workspace-up
+      val: ['<Shift><Super>k']
+    - key: switch-to-workspace-down
+      val: ['<Super>j']
+    - key: switch-to-workspace-up
+      val: ['<Super>k']
+
+- name: favorite apps in dock
+  become_user: "{{ username }}"
+  dconf:
+    key: "/org/gnome/shell/favorite-apps"
+    value: 
+      - 'firefox.desktop'
+      - 'google-chrome.desktop'
+      - 'terminator.desktop'
+      - 'intellij-idea-community_intellij-idea-community.desktop'
+      - 'org.gnome.Nautilus.desktop'
+      - 'discord_discord.desktop'
+      - 'spotify_spotify.desktop'
+      - 'caffeine-indicator.desktop'
+      - 'org.gnome.Screenshot.desktop'
+      - 'com.uploadedlobster.peek.desktop'
+      - 'yelp.desktop'
+    state: present
+

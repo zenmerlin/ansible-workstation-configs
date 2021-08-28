@@ -1,0 +1,44 @@
+---
+# Misc. user setup
+- name: "user | {{ username }} | remove pre-installed home dirs"
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    state: absent
+  with_items:
+    - Desktop
+    - Documents
+    - Downloads
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: "user | {{ username }} | setup home directories"
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+  with_items:
+    - bin
+    - desktop
+    - documents
+    - downloads
+    - music
+    - pictures
+    - public
+    - src
+    - templates
+    - videos
+    - .config/zshrc
+
+- name: "user | {{ username }} | set user-dirs.dirs"
+  copy:
+    src: user-dirs.dirs
+    dest: "/home/{{ username }}/.config/user-dirs.dirs"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0600
+  notify: update_xdg

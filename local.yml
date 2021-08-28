@@ -1,0 +1,38 @@
+# Preliminary tasks to run before roles
+- hosts: all
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+# Provision dev machines
+- hosts: dev
+  become: true
+  roles:
+    - core
+    - desktop
+    - vim
+    - terraform
+    - geerlingguy.docker
+    - nvm
+    - go
+    - k8s
+
+# End of run cleanup
+- hosts: all
+  become: true
+  tasks:
+  - name: cleanup package cache (debian and ubuntu)
+    apt:
+      autoclean: yes
+    changed_when: false
+    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+  - name: autoremove orphan packages (debian and ubuntu)
+    apt:
+      autoremove: yes
+      purge: yes
+    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]

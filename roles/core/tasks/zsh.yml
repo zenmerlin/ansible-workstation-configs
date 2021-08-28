@@ -1,0 +1,22 @@
+---
+# Install and configure oh-my-zsh
+- name: zsh | git clone oh-my-zsh
+  become: yes
+  become_user: jason
+  command: 'git clone -c core.autocrlf=input --depth 1 https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh'
+  args:
+    chdir: /home/jason
+    creates: /home/jason/.oh-my-zsh
+
+- name: zsh | set shell to zsh
+  user:
+    name: jason
+    shell: /usr/bin/zsh
+
+- name: zsh | write zshrc
+  copy:
+    src: zshrc
+    dest: /home/jason/.zshrc
+    owner: jason
+    group: jason
+    mode: 0644

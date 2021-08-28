@@ -1,0 +1,61 @@
+---
+- name: check for existing installation
+  stat:
+    path: /usr/local/go/bin/go
+  register: prev_install 
+
+- name: previous install found?
+  debug:
+    msg: "{{ prev_install.stat.exists }}"
+
+- name: register version of existing installation
+  command: /usr/local/go/bin/go version
+  register: prev_version
+  changed_when: false
+  when: prev_install.stat.exists|bool
+
+- name: report previous version
+  debug:
+    msg: "{{ prev_version.stdout }}"
+  when: prev_install.stat.exists|bool
+
+- name: proceed with install?
+  set_fact:
+    do_install: "{{ not prev_install.stat.exists or 
+                (prev_install.stat.exists and prev_version.stdout != go.version_stdout) }}"
+
+- name: fetch go tarball
+  get_url:
+    url: "https://golang.org/dl/go{{ go.version }}.linux-amd64.tar.gz"
+    dest: "/tmp/go{{ go.version }}.linux-amd64.tar.gz"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0755
+    checksum: "{{ go.checksum }}"
+  when: do_install|bool
+
+- name: remove existing go installation
+  file:
+    path: /usr/local/go
+    state: absent
+  when: do_install|bool
+
+- name: extract go into install directory
+  unarchive:
+    src: "/tmp/go{{ go.version }}.linux-amd64.tar.gz"
+    dest: "/usr/local/"
+  when: do_install|bool
+
+- name: cleanup tarball
+  file:
+    path: "/tmp/go{{ go.version }}.linux-amd64.tar.gz"
+    state: absent
+  when: do_install|bool
+
+- name: zsh config
+  copy:
+    src: gorc.zsh
+    dest: "/home/{{ username }}/.config/zshrc/gorc.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644

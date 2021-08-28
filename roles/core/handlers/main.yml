@@ -1,0 +1,5 @@
+---
+# Core handlers
+- name: update_xdg
+  become_user: "{{ username }}"
+  command: /usr/bin/xdg-user-dirs-update

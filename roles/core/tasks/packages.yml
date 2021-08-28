@@ -1,0 +1,70 @@
+---
+# Core package installs
+- name: packages | misc
+  apt:
+    name:
+      - git
+      - zsh
+      - ranger
+      - tree
+      - tmux
+      - htop
+      - zip
+      - jq
+      - jo
+      - fzf
+      - xclip
+      - neofetch
+      - cowsay
+      - lolcat
+
+- name: packages | networking
+  apt:
+    name:
+      - curl
+      - wget
+      - net-tools
+      - nmap
+      - proxychains
+      - tor
+      - tshark
+      - sshpass
+      - httpie
+
+- name: packages | developer tooling
+  apt:
+    name:
+      - build-essential
+      - libssl-dev
+      - libffi-dev
+      - python3-pip
+      - python3-venv
+      - python3-dev
+      - shellcheck
+      - valgrind
+      - maven
+
+# Configure core packages
+- name: packages | ranger zsh config
+  copy:
+    src: rangerrc.zsh
+    dest: "/home/{{ username }}/.config/zshrc/rangerrc.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: packages | ranger config files
+  copy:
+    src: rc.conf
+    dest: "/home/{{ username }}/.config/ranger/rc.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: packages | git
+  copy:
+    src: gitconfig
+    dest: "/home/{{ username }}/.gitconfig"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644

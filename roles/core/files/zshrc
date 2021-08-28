@@ -1,0 +1,61 @@
+# Path to config root directory
+export CONFIG_DIR="${HOME}/.config"
+
+# Path to zshrc includes
+export ZSHRC="${CONFIG_DIR}/zshrc"
+
+# Path to your oh-my-zsh installation.
+export ZSH="${HOME}/.oh-my-zsh"
+
+# PATH
+export PATH="${PATH}:${HOME}/bin:${HOME}/.local/bin:${HOME}/.dotfiles/bin"
+
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  aws
+  docker
+  docker-compose
+  git
+  golang
+  terraform
+  vscode
+  vundle
+)
+
+# Import oh-my-zsh configuration
+source $ZSH/oh-my-zsh.sh
+
+# Vim commandline editing preferences
+set -o vi
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# Make vim default editor
+export EDITOR=/usr/bin/vim
+export VISUAL=/usr/bin/vim
+
+# Import tool specific configurations
+for file in $(find -H "$ZSHRC" -name "*rc.zsh"); do
+  source "$file"
+done
+
+# Run provisioner command
+alias provision="ansible-pull -oKU 'ssh://git@github.com/zenmerlin/ansible-workstation-configs.git'"
+
+# fzf keybindings and fuzzy auto-completion
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+source /usr/share/doc/fzf/examples/completion.zsh
+
+# Run neofetch at startup
+neofetch

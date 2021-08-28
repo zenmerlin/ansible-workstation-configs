@@ -1,0 +1,10 @@
+---
+tfenv_path: "/home/{{ username }}/.tfenv" 
+tgenv_path: "/home/{{ username }}/.tgenv"
+tf_versions:
+  - 0.12.30
+  - 0.13.6
+  - 0.14.7
+tg_versions:
+  - 0.24.4
+  - 0.28.7

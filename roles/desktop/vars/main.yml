@@ -1,0 +1,2 @@
+---
+backgrounds_dir: "/home/{{ username }}/.local/share/backgrounds"

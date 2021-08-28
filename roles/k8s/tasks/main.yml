@@ -1,0 +1,26 @@
+---
+- name: ensure packages needed to use k8s apt repository are installed
+  apt:
+    name:
+      - apt-transport-https
+      - ca-certificates
+
+- name: add the Google Cloud public signing key
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  register: add_repository_key
+
+- name: add Kubernetes repository.
+  apt_repository:
+    repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+    state: present
+    update_cache: true
+
+- name: install kubectl
+  apt: 
+    name: kubectl
+
+- name: install k9s
+  snap:
+    name: k9s

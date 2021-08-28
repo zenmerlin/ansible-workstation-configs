@@ -1,0 +1,10 @@
+---
+# TODO: The vim command below returns an error on the first run installing
+# plugins, even though it appears to complete successfully. Need to figure
+# out why and handle/correct. For time being, we just ignore the error.
+- name: install vundle plugins
+  become_user: "{{ username }}"
+  command: >
+    vim -E -s -c "source {{ config_path }}/vimrc"
+    -c PluginInstall -c qa
+  ignore_errors: yes

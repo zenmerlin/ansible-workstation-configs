@@ -1,0 +1,15 @@
+---
+- name: clone nvm
+  become_user: "{{ username }}"
+  git:
+    repo: https://github.com/nvm-sh/nvm.git
+    dest: "{{ nvm_path }}"
+    version: "{{ nvm_version }}"
+
+- name: zsh config
+  copy:
+    src: nvmrc.zsh
+    dest: "/home/{{ username }}/.config/zshrc/nvmrc.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644

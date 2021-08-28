@@ -1,0 +1,8 @@
+""" Plugins ---------------------------
+set surround
+set multiple-cursors
+set NERDTree
+
+""" Mappings --------------------------
+inoremap jk <esc>
+vnoremap jk <esc> 
