@@ -15,7 +15,7 @@ example to build your own.** If you want to build this configuration as-is,
 use a fresh VM without anything you want to lose on it. Also, I recommend at
 least changing the username defined in `group_vars`. 
 
-## How It Use
+## How To Use
 Fork this repo, read over it, edit as necessary. **Make it yours**. To apply
 this config, start with a fresh install of your favorite linux distro (Ubuntu
 20.04 LTS is the only supported as-is; substitute with whatever distro you've
