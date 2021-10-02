@@ -76,6 +76,9 @@
     mode: 0600
   register: vs_code_extensions
 
+# Command frequently returns nonzero return code even if extensions are all
+# successfully installed. TODO: consider using failed_when to define failure
+# states explicitly. Ignoring for now.
 - name: install vs code extensions
   become_user: "{{ username }}"
   shell:
