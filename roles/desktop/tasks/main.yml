@@ -27,9 +27,11 @@
       - discord
       - spotify
 
-- name: java development related snap packages
+- name: IDE snap packages
   community.general.snap:
-    name: intellij-idea-community
+    name:
+      - intellij-idea-community
+      - code
     classic: yes
 
 - name: vagrant related packages
@@ -48,6 +50,7 @@
     mode: 0700
   with_items:
     - "/home/{{ username }}/.config/terminator"
+    - "/home/{{ username }}/.config/Code/User/"
 
 - name: software configuration
   copy:
@@ -61,6 +64,25 @@
       dest: "/home/{{ username }}/.config/terminator/config"
     - src: intellij-idea/.ideavimrc
       dest: "/home/{{ username }}/.ideavimrc"
+    - src: vscode/settings.json
+      dest: "/home/{{ username }}/.config/Code/User/settings.json"
+
+- name: vs code extensions list
+  copy:
+    src: vscode/extensions.txt
+    dest: "/home/{{ username }}/.config/Code/User/extensions.txt"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0600
+  register: vs_code_extensions
+
+- name: install vs code extensions
+  ansible.builtin.shell: |
+    < /home/{{ username }}/.config/Code/User/extensions.txt \
+    xargs -L1 /snap/bin/code --install-extension
+  become: yes
+  become_user: "{{ username }}"
+  when: vs_code_extensions.changed
 
 # Desktop appearance / Gnome settings
 - name: background directory
