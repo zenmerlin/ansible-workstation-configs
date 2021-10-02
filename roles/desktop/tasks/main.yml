@@ -78,8 +78,8 @@
 
 - name: install vs code extensions
   ansible.builtin.shell: |
-    < /home/{{ username }}/.config/Code/User/extensions.txt \
-    xargs -L1 /snap/bin/code --install-extension
+    xargs -L1 /snap/bin/code --install-extension \
+    < /home/{{ username }}/.config/Code/User/extensions.txt
   become: yes
   become_user: "{{ username }}"
   when: vs_code_extensions.changed
@@ -146,6 +146,7 @@
       - 'firefox.desktop'
       - 'google-chrome.desktop'
       - 'terminator.desktop'
+      - 'code_code.desktop'
       - 'intellij-idea-community_intellij-idea-community.desktop'
       - 'org.gnome.Nautilus.desktop'
       - 'discord_discord.desktop'
