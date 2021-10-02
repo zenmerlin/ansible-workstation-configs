@@ -77,11 +77,11 @@
   register: vs_code_extensions
 
 - name: install vs code extensions
-  ansible.builtin.shell: |
-    xargs -L1 /snap/bin/code --install-extension \
-    < /home/{{ username }}/.config/Code/User/extensions.txt
-  become: yes
   become_user: "{{ username }}"
+  ansible.builtin.shell:
+    cmd: |
+      xargs -L1 /snap/bin/code --install-extension \
+      < /home/{{ username }}/.config/Code/User/extensions.txt
   when: vs_code_extensions.changed
 
 # Desktop appearance / Gnome settings
