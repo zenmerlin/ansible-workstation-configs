@@ -15,6 +15,7 @@ ritwickdey.LiveServer
 samuelcolvin.jinjahtml
 stkb.rewrap
 timonwong.shellcheck
+tomaciazek.ansible
 tomphilbin.gruvbox-themes
 twxs.cmake
 vscode-icons-team.vscode-icons
