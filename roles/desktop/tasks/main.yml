@@ -78,7 +78,7 @@
 
 - name: install vs code extensions
   become_user: "{{ username }}"
-  ansible.builtin.shell:
+  shell:
     cmd: |
       xargs -L1 /snap/bin/code --install-extension \
       < /home/{{ username }}/.config/Code/User/extensions.txt
