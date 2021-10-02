@@ -83,6 +83,7 @@
       xargs -L1 /snap/bin/code --install-extension \
       < /home/{{ username }}/.config/Code/User/extensions.txt
   when: vs_code_extensions.changed
+  ignore_errors: yes
 
 # Desktop appearance / Gnome settings
 - name: background directory
