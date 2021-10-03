@@ -10,16 +10,17 @@
     "[css]": {
         "editor.defaultFormatter": "aeschli.vscode-css-formatter"
     },
-    "editor.rulers": [
-        80,
-        100,
-        120
-    ],
     "vsicons.dontShowNewVersionMessage": true,
     "window.zoomLevel": -1,
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.useTabStops": false,
+        "editor.rulers": [79]
+    },
     "[go]": {
         "editor.tabSize": 8,
-        "editor.useTabStops": true
+        "editor.useTabStops": true,
+        "editor.rulers": [100]
     },
     "shellcheck.disableVersionCheck": true,
     "go.formatTool": "goimports",
