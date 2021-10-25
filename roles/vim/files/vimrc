@@ -78,3 +78,19 @@ augroup go
   autocmd FileType go setlocal shiftwidth=8 softtabstop=8 expandtab
   autocmd BufNewFile,BufRead *.gohtml set syntax=html
 augroup END
+
+" Terraform/HCL Source Settings
+" ==============================================================================
+autocmd BufNewFile,BufRead *.hcl set filetype=tf
+let g:ycm_language_server = [
+\   {
+\     'name': 'terraform',
+\     'cmdline': [ '/usr/local/bin/terraform-ls', 'serve', '-port', '8001' ],
+\     'filetypes': [ 'tf' ],
+\     'port': [ '8001' ]
+\   }
+\ ]
+
+" Groovy Source Settings
+" ==============================================================================
+autocmd FileType groovy setlocal shiftwidth=4 softtabstop=4 expandtab
