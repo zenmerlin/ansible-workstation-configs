@@ -152,6 +152,7 @@
       - 'google-chrome.desktop'
       - 'terminator.desktop'
       - 'code_code.desktop'
+      - 'postman_postman.desktop'
       - 'intellij-idea-community_intellij-idea-community.desktop'
       - 'org.gnome.Nautilus.desktop'
       - 'discord_discord.desktop'
