@@ -26,7 +26,6 @@
     name:
       - discord
       - spotify
-      - postman
 
 - name: IDE snap packages
   community.general.snap:
