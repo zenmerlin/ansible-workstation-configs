@@ -13,3 +13,11 @@
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0644
+
+- name: nvmrc
+  copy:
+    src: .nvmrc
+    dest: "/home/{{ username }}/.nvmrc"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
