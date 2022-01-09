@@ -1,0 +1,66 @@
+---
+# Ansible user setup
+- name: "users | create ansible user"
+  user:
+    name: ansible
+    system: yes
+    shell: /sbin/nologin
+
+- name: "users | copy sudoers_ansible"
+  copy:
+    src: sudoers_ansible
+    dest: /etc/sudoers.d/ansible
+    owner: root
+    group: root
+    mode: 0440
+
+- name: "users | cron job for ansible-pull"
+  cron:
+    user: ansible
+    name: "ansible provision"
+    minute: "*/10"
+    job: "/usr/bin/ansible-pull -oU https://github.com/zenmerlin/ansible-workstation-configs.git >> /var/log/ansible.log 2>&1"
+
+# Primary user setup (user should have already been created prior to provisioning)
+- name: "users | {{ username }} | remove pre-installed home dirs"
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    state: absent
+  with_items:
+    - Desktop
+    - Documents
+    - Downloads
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: "users | {{ username }} | setup home directories"
+  file:
+    path: "/home/{{ username }}/{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0700
+  with_items:
+    - bin
+    - desktop
+    - documents
+    - downloads
+    - music
+    - pictures
+    - public
+    - src
+    - templates
+    - videos
+    - .config/zshrc
+
+- name: "users | {{ username }} | set user-dirs.dirs"
+  copy:
+    src: user-dirs.dirs
+    dest: "/home/{{ username }}/.config/user-dirs.dirs"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0600
+  notify: update_xdg
