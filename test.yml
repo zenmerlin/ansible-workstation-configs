@@ -1,0 +1,37 @@
+# Preliminary tasks to run before roles
+- hosts: localhost
+  connection: local
+  become: true
+  pre_tasks:
+    - name: pre-run | update package cache (debian, etc)
+      tags: always
+      apt: update_cache=yes
+      changed_when: False
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+# Provision dev machines
+- hosts: localhost
+  connection: local
+  become: true
+  vars:
+    username: jason
+    background_img: "ahsoka_vader_1920x1200.jpg"
+  roles:
+    - k8s
+
+# End of run cleanup
+- hosts: localhost
+  connection: local
+  become: true
+  tasks:
+  - name: cleanup package cache (debian and ubuntu)
+    apt:
+      autoclean: yes
+    changed_when: false
+    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]
+
+  - name: autoremove orphan packages (debian and ubuntu)
+    apt:
+      autoremove: yes
+      purge: yes
+    when: ansible_distribution in ["Debian", "Pop!_OS", "Ubuntu"]

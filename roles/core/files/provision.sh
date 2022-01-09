@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-log_dir='/home/jason/test'
+log_dir='/var/log/ansible'
 log_file="${log_dir}/$(date +'%Y%m%d')_provisioner.log"
 log_retention_days="30"
 log_retention_cutoff_date=$(date -d "${log_retention_days} days ago" +'%Y%m%d')
