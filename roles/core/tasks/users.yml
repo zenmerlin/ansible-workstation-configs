@@ -14,12 +14,20 @@
     group: root
     mode: 0440
 
+- name: "users | create log directory for ansible user"
+  file:
+    path: "/var/log/ansible"
+    state: directory
+    owner: ansible
+    group: ansible
+    mode: 0700
+
 - name: "users | cron job for ansible-pull"
   cron:
     user: ansible
     name: "ansible provision"
     minute: "*/10"
-    job: "/usr/bin/ansible-pull -oU https://github.com/zenmerlin/ansible-workstation-configs.git >> /var/log/ansible.log 2>&1"
+    job: "/usr/bin/ansible-pull -oU https://github.com/zenmerlin/ansible-workstation-configs.git >> /var/log/ansible/provisioner.log 2>&1"
 
 # Primary user setup (user should have already been created prior to provisioning)
 - name: "users | {{ username }} | remove pre-installed home dirs"
