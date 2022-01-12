@@ -53,10 +53,18 @@
     group: "{{ username }}"
     mode: 0644
 
-- name: packages | ranger config files
+- name: packages | ranger rc.conf
   copy:
     src: rc.conf
     dest: "/home/{{ username }}/.config/ranger/rc.conf"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
+- name: packages | ranger colorscheme
+  copy:
+    src: reddragon.py
+    dest: "/home/{{ username }}/.config/ranger/colorschemes/reddragon.py"
     owner: "{{ username }}"
     group: "{{ username }}"
     mode: 0644

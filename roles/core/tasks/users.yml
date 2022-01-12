@@ -71,6 +71,7 @@
     - templates
     - videos
     - .config/zshrc
+    - .config/ranger/colorschemes
 
 - name: "users | {{ username }} | set user-dirs.dirs"
   copy:
