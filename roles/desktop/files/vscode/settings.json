@@ -25,6 +25,7 @@
     "shellcheck.disableVersionCheck": true,
     "go.formatTool": "goimports",
     "go.useLanguageServer": true,
-    "editor.multiCursorModifier": "alt"
+    "editor.multiCursorModifier": "alt",
+    "html.suggest.html5": true
 }
 
