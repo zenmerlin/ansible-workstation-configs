@@ -159,6 +159,7 @@
       - 'discord_discord.desktop'
       - 'spotify_spotify.desktop'
       - 'caffeine-indicator.desktop'
+      - 'gimp.desktop'
       - 'org.gnome.Screenshot.desktop'
       - 'com.uploadedlobster.peek.desktop'
       - 'yelp.desktop'
