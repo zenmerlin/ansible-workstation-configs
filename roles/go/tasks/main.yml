@@ -26,7 +26,7 @@
 
 - name: fetch go tarball
   get_url:
-    url: "https://golang.org/dl/go{{ go.version }}.linux-amd64.tar.gz"
+    url: "https://go.dev/dl/go{{ go.version }}.linux-amd64.tar.gz"
     dest: "/tmp/go{{ go.version }}.linux-amd64.tar.gz"
     owner: "{{ username }}"
     group: "{{ username }}"

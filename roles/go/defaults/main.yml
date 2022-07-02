@@ -1,6 +1,6 @@
 ---
 username: jason
 go:
-  version: 1.16.2
-  checksum: sha256:542e936b19542e62679766194364f45141fde55169db2d8d01046555ca9eb4b8
-  version_stdout: "go version go1.16.2 linux/amd64"
+  version: 1.18.3
+  checksum: sha256:956f8507b302ab0bb747613695cdae10af99bbd39a90cae522b7c0302cc27245
+  version_stdout: "go version go1.18.3 linux/amd64"

@@ -8,6 +8,7 @@ geequlim.godot-tools
 golang.go
 hashicorp.terraform
 JamesBirtles.svelte-vscode
+mhutchie.git-graph
 ms-azuretools.vscode-docker
 ms-python.python
 ms-vscode.cpptools
