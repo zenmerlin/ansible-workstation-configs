@@ -6,6 +6,7 @@ dotiful.dotfiles-syntax-highlighting
 eamodio.gitlens
 Equinusocio.vsc-community-material-theme
 geequlim.godot-tools
+GitHub.copilot
 golang.go
 hashicorp.terraform
 ms-azuretools.vscode-docker
