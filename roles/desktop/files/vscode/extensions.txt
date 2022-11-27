@@ -4,6 +4,7 @@ casualjim.gotemplate
 donjayamanne.githistory
 dotiful.dotfiles-syntax-highlighting
 eamodio.gitlens
+Equinusocio.vsc-community-material-theme
 geequlim.godot-tools
 golang.go
 hashicorp.terraform

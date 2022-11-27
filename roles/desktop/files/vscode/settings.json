@@ -1,6 +1,6 @@
 {
     "workbench.iconTheme": "vscode-icons",
-    "workbench.colorTheme": "Kimbie Dark",
+    "workbench.colorTheme": "Community Material Theme Darker",
     "vim.insertModeKeyBindingsNonRecursive": [
         {
             "before": ["j", "k"],
