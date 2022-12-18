@@ -1,8 +1,22 @@
-""" Plugins ---------------------------
-set surround
-set multiple-cursors
-set NERDTree
+Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
 
-""" Mappings --------------------------
-inoremap jk <esc>
-vnoremap jk <esc> 
+""" multiple cursors plugin
+""" https://github.com/terryma/vim-multiple-cursors
+" Emulates vim-multiple-cursors
+" Commands:
+"   mc start multicursor / next match
+"   mx skip next match
+"   mp remove current match and go back to previous
+Plug 'terryma/vim-multiple-cursors'
+map mc <A-n>
+map mx <A-x>
+map mp <A-p>
+
+
+""" Window Navigation
+noremap <C-h> <C-w>h
+noremap <C-l> <C-w>l
+noremap <C-j> <C-w>j
+noremap <C-k> <C-w>k
+
