@@ -17,6 +17,7 @@
       - neofetch
       - cowsay
       - lolcat
+      - figlet
 
 - name: packages | networking
   apt:
