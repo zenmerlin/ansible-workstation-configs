@@ -1,0 +1,19 @@
+---
+- name: flutter and dart
+  community.general.snap:
+    name: flutter
+    classic: yes
+
+- name: apt package dependencies
+  apt:
+    name:
+      - clang
+      - cmake
+      - ninja-build
+      - pkg-config
+      - libgtk-3-dev
+      - liblzma-dev
+
+# TODO: setup Android studio/emulator (maybe not worth automating)
+# For now, just do it manually following these instructions:
+# https://docs.flutter.dev/get-started/install/linux#android-setup

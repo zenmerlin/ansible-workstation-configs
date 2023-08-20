@@ -20,6 +20,7 @@
     - nvm
     - go
     - k8s
+    - flutter
 
 # End of run cleanup
 - hosts: all
