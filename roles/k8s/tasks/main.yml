@@ -39,7 +39,12 @@
   snap:
     name:
       - k9s
-      - helm
       - kustomize
+
+- name: install k8s classic snap packages
+  snap:
+    classic: yes
+    name:
+      - helm
       - kubectx
 
