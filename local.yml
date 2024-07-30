@@ -1,12 +1,14 @@
 # Preliminary tasks to run before roles
-- hosts: all
-  become: true
-  pre_tasks:
-    - name: pre-run | update package cache (debian, etc)
-      tags: always
-      apt: update_cache=yes
-      changed_when: False
-      when: ansible_distribution in ["Debian", "Ubuntu"]
+# Temporarily removed due to apt-cache update failing
+# Error: "Failed to update apt cache: W:Updating from such a repository can't be done securely, and is therefore disabled by default., W:See apt-secure(8) manpage for repository creation and user configuration details., E:The repository 'https://apt.kubernetes.io kubernetes-xenial Release' no longer has a Release file."
+# - hosts: all
+#   become: true
+#   pre_tasks:
+#     - name: pre-run | update package cache (debian, etc)
+#       tags: always
+#       apt: update_cache=yes
+#       changed_when: False
+#       when: ansible_distribution in ["Debian", "Ubuntu"]
 
 # Provision dev machines
 - hosts: dev
