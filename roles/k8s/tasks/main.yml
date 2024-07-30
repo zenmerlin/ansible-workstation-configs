@@ -30,11 +30,16 @@
     filename: kubernetes
     repo: "deb [signed-by={{ k8s_gpgpath }}] {{ k8s_repository }} /"
 
-- name: install k8s packages
+- name: install k8s apt packages
   apt: 
     name:
       - kubectl
 
-- name: install k9s
+- name: install k8s snap packages
   snap:
-    name: k9s
+    name:
+      - k9s
+      - helm
+      - kustomize
+      - kubectx
+
