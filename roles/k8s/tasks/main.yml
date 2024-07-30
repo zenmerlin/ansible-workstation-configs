@@ -5,16 +5,19 @@
       - apt-transport-https
       - ca-certificates
 
-- name: add the Google Cloud public signing key
+# Need to migrate the k8s repository and signing key:
+# https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/
+# https://medium.com/@martin.hodges/installing-kubernetes-from-the-new-k8s-io-repository-using-ansible-8e7319fa97fd
+- name: remove the Google Cloud public signing key
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+    state: absent
   register: add_repository_key
 
-- name: add Kubernetes repository.
+- name: remove old Kubernetes repository.
   apt_repository:
     repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
-    state: present
+    state: absent
     update_cache: true
 
 - name: install kubectl
