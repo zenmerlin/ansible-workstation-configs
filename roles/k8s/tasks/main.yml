@@ -21,7 +21,8 @@
     update_cache: true
 
 - name: get Kubernetes package key
-      shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
+      shell: |
+        curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
       args:
         creates: "{{ k8s_gpgpath }}"
 
