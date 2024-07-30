@@ -11,7 +11,7 @@
 - name: remove the Google Cloud public signing key
   apt_key:
     url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
-    state: present
+    state: absent
   register: add_repository_key
 
 - name: remove old Kubernetes repository.
