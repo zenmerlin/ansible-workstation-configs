@@ -48,3 +48,11 @@
       - helm
       - kubectx
 
+- name: zsh rc file
+  copy:
+    src: k8src.zsh
+    dest: "/home/{{ username }}/.config/zshrc/k8src.zsh"
+    owner: "{{ username }}"
+    group: "{{ username }}"
+    mode: 0644
+
