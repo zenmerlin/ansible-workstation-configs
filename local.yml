@@ -1,7 +1,13 @@
 # Preliminary tasks to run before roles
-# Temporarily removed due to apt-cache update failing
-# Error: "Failed to update apt cache: W:Updating from such a repository can't be done securely, and is therefore disabled by default., W:See apt-secure(8) manpage for repository creation and user configuration details., E:The repository 'https://apt.kubernetes.io kubernetes-xenial Release' no longer has a Release file."
-# - hosts: all
+# Temporarily removed due to apt update failing with following errors:
+#
+# Err:13 https://packages.cloud.google.com/apt kubernetes-xenial Release
+#  404  Not Found [IP: 172.253.124.113 443]
+# Reading package lists... Done
+# E: The repository 'https://apt.kubernetes.io kubernetes-xenial Release' no longer has a Release file.
+# N: Updating from such a repository can't be done securely, and is therefore disabled by default.
+# N: See apt-secure(8) manpage for repository creation and user configuration details.
+#
 #   become: true
 #   pre_tasks:
 #     - name: pre-run | update package cache (debian, etc)
