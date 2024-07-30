@@ -25,4 +25,3 @@ playbooks on your machine like so:
 
     ansible-pull -oKU 'ssh://git@github.com/yourghpage/yourrepo.git'
 
-
