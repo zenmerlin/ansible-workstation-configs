@@ -41,6 +41,15 @@
       - k9s
       - kustomize
 
+# Because snap install of k9s doesn't symlink to /snap/bin for some reason
+- name: symlink k9s
+  file:
+    src: "/snap/k9s/current/bin/k9s"
+    dest: "/snap/bin/k9s"
+    owner: root
+    group: root
+    state: link
+
 - name: install k8s classic snap packages
   snap:
     classic: yes
