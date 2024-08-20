@@ -45,6 +45,11 @@
       - valgrind
       - maven
 
+- name: packages | snap
+  community.general.snap:
+    name:
+      - yq
+
 # Configure core packages
 - name: packages | ranger zsh config
   copy:
