@@ -44,6 +44,8 @@
       - shellcheck
       - valgrind
       - maven
+      - pkg-config
+      - libusb-1.0-0-dev
 
 - name: packages | snap
   community.general.snap:
