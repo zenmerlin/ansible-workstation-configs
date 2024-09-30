@@ -21,7 +21,6 @@ ms-toolsai.jupyter-renderers
 ms-toolsai.vscode-jupyter-cell-tags
 ms-toolsai.vscode-jupyter-slideshow
 ms-vscode.cpptools
-redhat.ansible
 redhat.vscode-yaml
 ritwickdey.LiveServer
 rust-lang.rust-analyzer
