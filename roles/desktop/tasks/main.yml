@@ -37,6 +37,11 @@
       - goland
     classic: yes
 
+- name: obsidian
+  community.general.snap:
+    name: obsidian
+    classic: yes
+
 - name: vagrant related packages
   apt:
     name:
