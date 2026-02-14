@@ -28,7 +28,7 @@
     update_cache: true
 
 - name: get Kubernetes package key
-  shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
+  shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --batch --yes --dearmor -o {{ k8s_gpgpath }}
 
 - name: install Kubernetes repository
   apt_repository:
