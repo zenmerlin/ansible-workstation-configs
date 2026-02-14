@@ -28,7 +28,8 @@ purge_logs() {
 run_provisioner() {
   echo "Provisioner run started"
   /usr/bin/ansible-pull -oU \
-    'https://github.com/zenmerlin/ansible-workstation-configs.git'
+    'https://github.com/zenmerlin/ansible-workstation-configs.git' \
+    -i hosts
   echo "Provisioner run ended, exit code: ${?}"
 }
 

@@ -23,5 +23,5 @@ redesigned your fork to support) and install Ansible on it using the
 recommended method. After that you can use `ansible-pull` to fetch and run the
 playbooks on your machine like so:
 
-    ansible-pull -oKU 'ssh://git@github.com/yourghpage/yourrepo.git'
+    ansible-pull -oKU 'ssh://git@github.com/yourghpage/yourrepo.git' -i hosts
 
