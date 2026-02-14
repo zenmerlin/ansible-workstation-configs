@@ -52,6 +52,12 @@
     name:
       - yq
 
+- name: packages | snap classic
+  community.general.snap:
+    name:
+      - gh
+    classic: yes
+
 # Configure core packages
 - name: packages | ranger zsh config
   copy:
