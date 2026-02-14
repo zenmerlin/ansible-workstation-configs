@@ -20,10 +20,15 @@
     state: absent
     update_cache: true
 
+- name: old k8s v1.28 repository
+  apt_repository:
+    filename: kubernetes
+    repo: "deb [signed-by={{ k8s_gpgpath }}] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /"
+    state: absent
+    update_cache: true
+
 - name: get Kubernetes package key
   shell: curl -fsSL {{ k8s_url_apt_key }} | gpg --dearmor -o {{ k8s_gpgpath }}
-  args:
-    creates: "{{ k8s_gpgpath }}"
 
 - name: install Kubernetes repository
   apt_repository:

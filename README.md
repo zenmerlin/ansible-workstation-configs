@@ -25,3 +25,7 @@ playbooks on your machine like so:
 
     ansible-pull -oKU 'ssh://git@github.com/yourghpage/yourrepo.git' -i hosts
 
+To run the playbook directly on the local machine:
+
+    ansible-playbook local.yml -c local --limit $(hostname)
+
